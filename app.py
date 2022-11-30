@@ -12,6 +12,8 @@ from commands.viewpoints import ViewPoints
 from configuration.env_config import Config
 from commands.createtask import CreateTask
 from helpers.errorhelper import ErrorHelper
+from json import dumps
+from helpers import helper
 
 
 app = Flask(__name__)
@@ -112,6 +114,7 @@ def vpending():
     vp = ViewPoints(progress=0.0)
     payload = vp.get_list()
 
+    print(jsonify(payload))
     return jsonify(payload)
 
 
@@ -135,6 +138,8 @@ def vcompleted():
 
     vp = ViewPoints(progress=1.0)
     payload = vp.get_list()
+
+    print(payload)
 
     return jsonify(payload)
 
@@ -211,10 +216,141 @@ def leaderboard():
     :rtype: Response
 
     """
-
-    l = Leaderboard()
-    payload = l.view_leaderboard()
+    payload = Leaderboard().view_leaderboard()
+    # print(jsonify(payload))
     return jsonify(payload)
+
+@app.route("/summary", methods=["POST"])
+def summary():
+    """
+    Endpoint to view the pending tasks , completed taks and leaderboard
+
+    :param:
+    :type:
+    :raise:
+    :return: Response object with payload object containing details of champions leading the SlackPoint challenge
+    :rtype: Response
+
+    """
+
+    vp = ViewPoints(progress=0.0)
+    payload = vp.get_list()
+
+    #print("payload", payload)
+    pending_tasks = ''
+    for task in payload:
+        taskid = task[0]
+        points = task[3]
+        taskname = task[4]
+        taskdate = task[5]
+
+        pending_tasks += """ SP-{taskid} ({pts} SlackPoints) {taskname} [Deadline: {dt}]./n""".format(
+            taskid=taskid, pts=points, taskname=taskname, dt=taskdate)
+
+    # leaderboard display
+    payload = Leaderboard().view_leaderboard()
+
+    leaderboard_msg = ''
+    for block in payload['blocks']:
+
+        leaderboard_msg += str(block['text']['text']) + '/n'
+
+
+    #completed Tasks
+    vp = ViewPoints(progress=1.0)
+    payload = vp.get_list()
+
+    completed_tasks = ""
+
+    messages = ['Summary is : ',]
+
+    parent_msg = {"blocks": []}
+    child_msg = {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*Summary is :*"
+                }
+            }
+    parent_msg['blocks'].append(child_msg)
+    child_msg = {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Pending Tasks are:"
+                }
+            }
+    parent_msg['blocks'].append(child_msg)
+
+    vp = ViewPoints(progress=0.0)
+    payload = vp.get_list()
+    for task in payload['blocks']:
+
+        child_msg = {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": task['text']['text']
+            }
+        }
+        parent_msg['blocks'].append(child_msg)
+    # completed tasks
+    child_msg = {
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": "Completed Tasks are:"
+        }
+    }
+    parent_msg['blocks'].append(child_msg)
+    vp = ViewPoints(progress=1.0)
+    payload = vp.get_list()
+    for task in payload['blocks']:
+        child_msg = {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": task['text']['text']
+            }
+        }
+        parent_msg['blocks'].append(child_msg)
+    # Leaderboard
+        child_msg = {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "Leaderboard Status:"
+            }
+        }
+        parent_msg['blocks'].append(child_msg)
+        payload = Leaderboard().view_leaderboard()
+        for task in payload['blocks']:
+            child_msg = {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": task['text']['text']
+                }
+            }
+            parent_msg['blocks'].append(child_msg)
+
+    return parent_msg
+
+@app.route("/summary-cron", methods=["POST"])
+def cron_summary():
+    """
+    Endpoint for the cronjob to automatically send summary after every X minutes/hours/seconds
+
+    :param:
+    :type:
+    :raise:
+    :return: Response object with payload object containing details of champions leading the SlackPoint challenge
+    :rtype: Response
+
+    """
+    helper.send_slack_message(summary())
+    return jsonify({"success": True})
+
 
 
 if __name__ == "__main__":
