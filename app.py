@@ -244,7 +244,7 @@ def summary():
         taskname = task[4]
         taskdate = task[5]
 
-        pending_tasks += """ SP-{taskid} ({pts} SlackPoints) {taskname} [Deadline: {dt}]./n""".format(
+        pending_tasks += """ Task ID: {taskid} ({pts} SlackPoints) {taskname} [Deadline: {dt}]./n""".format(
             taskid=taskid, pts=points, taskname=taskname, dt=taskdate)
 
     # leaderboard display
