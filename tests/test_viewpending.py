@@ -44,14 +44,14 @@ def test_view_pending_2tasks(
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": ">SP-1 (10 SlackPoints) This is Task 1 [Deadline: 2022-10-24]",
+                    "text": ">Task ID: 1 (10 SlackPoints) This is Task 1 [Deadline: 2022-10-24]",
                 },
             },
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": ">SP-2 (2 SlackPoints) This is Task 2 [Deadline: 2022-10-26]",
+                    "text": ">Task ID: 2 (2 SlackPoints) This is Task 2 [Deadline: 2022-10-26]",
                 },
             },
         ],
