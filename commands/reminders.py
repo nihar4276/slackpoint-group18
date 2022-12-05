@@ -29,3 +29,15 @@ class Reminders:
         print(task_details)
 
         return task_details, tomorrow
+
+    def reminder_msg(self):
+        # This method creat
+
+        pending_tasks, tomorrow = self.createReminder()
+        msg = ''
+        for task in pending_tasks:
+            task_name = pending_tasks[task]
+            msg += """ Task ID: {task} ({taskname}) [Deadline is {tomorrow_date}]./n""".format(
+                task=task, tomorrow_date=tomorrow)
+
+        return msg
