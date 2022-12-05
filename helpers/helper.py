@@ -2,6 +2,7 @@ import os
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
+
 def send_slack_message(message):
     """
     This message is used to send a message to our channel
@@ -10,7 +11,6 @@ def send_slack_message(message):
     :message: the message object to send
     :return: None
     """
-    #print(message)
     client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
     try:
         client.chat_postMessage(
