@@ -4,9 +4,10 @@ from commands.createtask import CreateTask
 from commands.taskdone import TaskDone
 from commands.leaderboard import Leaderboard
 
+
 class Summary:
 
-    def __init__(self, data):
+    def __init__(self):
         pass
 
     def get_summary(self):

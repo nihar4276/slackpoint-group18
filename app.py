@@ -11,6 +11,7 @@ from slackeventsapi import SlackEventAdapter
 from commands.viewpoints import ViewPoints
 from configuration.env_config import Config
 from commands.createtask import CreateTask
+from commands.summary import Summary
 from helpers.errorhelper import ErrorHelper
 from json import dumps
 from helpers import helper
@@ -233,7 +234,7 @@ def summary():
 
     """
 
-    return Summary.get_summary()
+    return Summary().get_summary()
 
 @app.route("/summary-cron", methods=["POST"])
 def cron_summary():
