@@ -82,19 +82,19 @@ def interactive_endpoint():
     return make_response("", 200)
 
 
-# @app.route("/")
-# def basic():
-#     """
-#     Health check endpoint
-#
-#     :param:
-#     :type:
-#     :raise:
-#     :return: 'Hello World' - the official health check response text
-#     :rtype: str
-#
-#     """
-#     return "Hello World"
+@app.route("/")
+def basic():
+    """
+    Health check endpoint
+
+    :param:
+    :type:
+    :raise:
+    :return: 'Hello World' - the official health check response text
+    :rtype: str
+
+    """
+    return "Hello World"
 
 
 @app.route("/viewpending", methods=["POST"])
@@ -120,32 +120,32 @@ def vpending():
     print(jsonify(payload))
     return jsonify(payload)
 
-
-@app.route("/viewcompleted", methods=["POST"])
-def vcompleted():
-    """
-    Endpoint to view the completed tasks
-
-    :param:
-    :type:
-    :raise:
-    :return: Response object with payload object containing details of completed tasks
-    :rtype: Response
-
-    """
-
-    data = request.form
-    channel_id = data.get("channel_id")
-    user_id = data.get("user_id")
-    text = data.get("text")
-
-    vp = ViewPoints(progress=1.0)
-    payload = vp.get_list()
-
-    print(payload)
-
-    return jsonify(payload)
-
+#
+# @app.route("/viewcompleted", methods=["POST"])
+# def vcompleted():
+#     """
+#     Endpoint to view the completed tasks
+#
+#     :param:
+#     :type:
+#     :raise:
+#     :return: Response object with payload object containing details of completed tasks
+#     :rtype: Response
+#
+#     """
+#
+#     data = request.form
+#     channel_id = data.get("channel_id")
+#     user_id = data.get("user_id")
+#     text = data.get("text")
+#
+#     vp = ViewPoints(progress=1.0)
+#     payload = vp.get_list()
+#
+#     print(payload)
+#
+#     return jsonify(payload)
+#
 
 @app.route("/taskdone", methods=["POST"])
 def taskdone():
@@ -354,31 +354,31 @@ def cron_summary():
     helper.send_slack_message(summary())
     return jsonify({"success": True})
 
-@app.route("/", methods=["POST"])
+@app.route("/viewcompleted", methods=["POST"])
 def cron_reminder():
     ##Make an object of reminder.py
     ## Call reminder_message() function from it
 
-    # msg= Reminder.reminder_message()
+    Reminder.createReminder()
     # print(msg)
 
-    #Just check how the message is going from send_slack_message
-    # helper.send_slack_message(msg)
-    data = request.form
-    channel_id = data.get("channel_id")
-    user_id = data.get("user_id")
-    text = data.get("text")
-    try:
-        # Call the conversations.list method using the WebClient
-        result = client.chat_postMessage(
-            channel=channel_id,
-            text="Cron Job worked"
-            # You could also use a blocks[] array to send richer content
-        )
-        # Print result, which includes information about the message (like TS)
-
-    except SlackApiError as e:
-        print(f"Error: {e}")
+    # #Just check how the message is going from send_slack_message
+    # # helper.send_slack_message(msg)
+    # data = request.form
+    # channel_id = data.get("channel_id")
+    # user_id = data.get("user_id")
+    # text = data.get("text")
+    # try:
+    #     # Call the conversations.list method using the WebClient
+    #     result = client.chat_postMessage(
+    #         channel=channel_id,
+    #         text="Cron Job worked"
+    #         # You could also use a blocks[] array to send richer content
+    #     )
+    #     # Print result, which includes information about the message (like TS)
+    #
+    # except SlackApiError as e:
+    #     print(f"Error: {e}")
 
 
 if __name__ == "__main__":
