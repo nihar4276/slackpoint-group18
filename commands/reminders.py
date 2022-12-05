@@ -4,7 +4,7 @@ import re
 
 class Reminders:
     """
-        This class handles the Create Reminder functionality.
+    This class handles the Create Reminder functionality.
     """
     def createReminder(self):
         '''
