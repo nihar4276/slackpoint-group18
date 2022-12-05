@@ -105,7 +105,7 @@ def interactive_endpoint():
                         channel=channel_id, user=user_id, blocks=error_blocks
                     )
                 else:
-                    blocks = et.edit_task(desc=desc, points=points, deadline=deadline, task_id=tid)
+                    blocks = et.edit_task(desc=desc, points=points, deadline=deadline)
                     slack_client.chat_postEphemeral(
                         channel=channel_id, user=user_id, blocks=blocks
                     )
