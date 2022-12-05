@@ -26,5 +26,6 @@ class Reminders:
             if taskdate == tomorrow:
                 task_details[taskid] = taskname
 
+        print(task_details)
 
-
+        return task_details, tomorrow
