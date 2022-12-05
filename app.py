@@ -78,36 +78,37 @@ def interactive_endpoint():
                         channel=channel_id, user=user_id, blocks=blocks
                     )
 
-            # elif actions[0]["action_id"] == "edit_action_button":
-            #     # Edit Task - button was clicked
-            #     channel_id = payload["container"]["channel_id"]
-            #     user_id = payload["user"]["id"]
-            #     helper = ErrorHelper()
-            #     et = EditTask()
-            #     state_values = payload["state"]["values"]
-            #     desc = None
-            #     deadline = None
-            #     points = None
-            #     for _, val in state_values.items():
-            #         if "edit_action_description" in val:
-            #             desc = val["edit_action_description"]["value"]
-            #         elif "edit_action_deadline" in val:
-            #             deadline = val["edit_action_deadline"]["selected_date"]
-            #         elif "edit_action_points" in val:
-            #             if val["edit_action_points"]["selected_option"] is not None:
-            #                 points = val["edit_action_points"]["selected_option"]["value"]
-            #             else:
-            #                 points = None
-            #     if desc is None or deadline is None or points is None:
-            #         error_blocks = helper.get_error_payload_blocks("edittask")
-            #         slack_client.chat_postEphemeral(
-            #             channel=channel_id, user=user_id, blocks=error_blocks
-            #         )
-            #     else:
-            #         blocks = et.edit_task(desc=desc, points=points, deadline=deadline, task_id=tid)
-            #         slack_client.chat_postEphemeral(
-            #             channel=channel_id, user=user_id, blocks=blocks
-            #         )
+            elif actions[0]["action_id"] == "edit_action_button":
+                # Edit Task - button was clicked
+                channel_id = payload["container"]["channel_id"]
+                user_id = payload["user"]["id"]
+                task_id = int(actions[0]["value"])
+                helper = ErrorHelper()
+                et = EditTask(task_id)
+                state_values = payload["state"]["values"]
+                desc = None
+                deadline = None
+                points = None
+                for _, val in state_values.items():
+                    if "edit_action_description" in val:
+                        desc = val["edit_action_description"]["value"]
+                    elif "edit_action_deadline" in val:
+                        deadline = val["edit_action_deadline"]["selected_date"]
+                    elif "edit_action_points" in val:
+                        if val["edit_action_points"]["selected_option"] is not None:
+                            points = val["edit_action_points"]["selected_option"]["value"]
+                        else:
+                            points = None
+                if desc is None or deadline is None or points is None:
+                    error_blocks = helper.get_error_payload_blocks("edittask")
+                    slack_client.chat_postEphemeral(
+                        channel=channel_id, user=user_id, blocks=error_blocks
+                    )
+                else:
+                    blocks = et.edit_task(desc=desc, points=points, deadline=deadline, task_id=tid)
+                    slack_client.chat_postEphemeral(
+                        channel=channel_id, user=user_id, blocks=blocks
+                    )
     return make_response("", 200)
 
 

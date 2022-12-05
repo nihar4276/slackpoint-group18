@@ -2,6 +2,7 @@ from copy import deepcopy
 import random
 from models import *
 from datetime import date
+from helpers.errorhelper import ErrorHelper
 
 
 class EditTask:
@@ -9,15 +10,15 @@ class EditTask:
     This class handles the Edit Task functionality.
     """
 
-    # base_edit_task_block_format = {
-    #     "type": "section",
-    #     "text": {
-    #         "type": "mrkdwn",
-    #         "text": ">{greeting}! Your task SP-{id} was edit successfully.",
-    #     },
-    # }
-    #
-    # greetings = ["Awesome", "Great", "Congratulations", "Well done", "Let's go"]
+    base_edit_task_block_format = {
+        "type": "section",
+        "text": {
+            "type": "mrkdwn",
+            "text": ">{greeting}! Your task SP-{id} was edited successfully.",
+        },
+    }
+
+    greetings = ["Awesome", "Great", "Congratulations", "Well done", "Let's go"]
 
     def __init__(self, task_id=None):
         """
@@ -47,11 +48,13 @@ class EditTask:
         :rtype: list
 
         """
+        task = self.get_task()
         block_description = {
             "type": "input",
             "element": {
                 "type": "plain_text_input",
                 "action_id": "edit_action_description",
+                "initial_value": task.description
             },
             "label": {"type": "plain_text", "text": "Description", "emoji": True},
         }
@@ -59,7 +62,7 @@ class EditTask:
             "type": "input",
             "element": {
                 "type": "datepicker",
-                "initial_date": date.today(),
+                "initial_date": task.deadline.strftime("%Y-%m-%d"),
                 "placeholder": {
                     "type": "plain_text",
                     "text": "Select a date",
@@ -97,6 +100,10 @@ class EditTask:
                     },
                 ],
                 "action_id": "edit_action_points",
+                "initial_option": {
+                    "text": {"type": "plain_text", "text": str(task.points), "emoji": False},
+                    "value": str(task.points),
+                }
             },
             "label": {"type": "plain_text", "text": "Points", "emoji": True},
         }
@@ -107,12 +114,12 @@ class EditTask:
                 "text": "Edit task"
             },
             "action_id": "edit_action_button",
+            "value": str(task.task_id)
         }
         block_actions = {"type": "actions", "elements": []}
         block_actions["elements"].append(block_actions_button)
 
         blocks = []
-        blocks.append({"task_id": self.task_id})
         blocks.append(block_description)
         blocks.append(block_deadline)
         blocks.append(block_points)
@@ -121,6 +128,7 @@ class EditTask:
 
     def is_editable(self):
         current_task_id = self.task_id
+        helper = ErrorHelper()
 
         # check if task id exists
         exists = db.session.query(db.exists().where(Task.task_id == current_task_id)).scalar()
@@ -138,7 +146,7 @@ class EditTask:
         elif exists is True and task_progress[0].progress == 0.0:
             return True, None
 
-    def edit_task(self, desc, points, deadline, t_id):
+    def edit_task(self, desc, points, deadline):
         """
         Edits a task in database and returns payload with success message
 
@@ -155,10 +163,16 @@ class EditTask:
         :rtype: list
 
         """
-        helper = ErrorHelper()
-        db.session.query(Task).filter_by(assignment_id=t_id).update(
+        db.session.query(Task).filter_by(task_id=self.task_id).update(
             dict(description=desc, points=points, deadline=deadline)
         )
         db.session.commit()
-        return helper.get_command_help("task_edited")
+        response = deepcopy(self.base_edit_task_block_format)
+        response["text"]["text"] = response["text"]["text"].format(greeting=random.choice(self.greetings), id=self.task_id)
+        self.payload["blocks"].append(response)
+        return self.payload["blocks"]
 
+
+    def get_task(self):
+        task = db.session.query(Task).filter_by(task_id=self.task_id).first()
+        return task

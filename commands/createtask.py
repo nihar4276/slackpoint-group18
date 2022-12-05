@@ -58,7 +58,7 @@ class CreateTask:
             "type": "input",
             "element": {
                 "type": "datepicker",
-                "initial_date": date.today(),
+                "initial_date": date.today().strftime("%Y-%m-%d"),
                 "placeholder": {
                     "type": "plain_text",
                     "text": "Select a date",
