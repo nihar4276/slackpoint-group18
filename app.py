@@ -313,10 +313,18 @@ def edit():
 
 @app.route("/reminder-cron", methods=["POST"])
 def cron_reminder():
-    print("working so far")
+    """
+    Endpoint to send reminders for pending tasks with close deadline
+
+    :param:
+    :type:
+    :raise:
+    :return: Response object with payload object sent to slack channel
+    :rtype: Response
+
+    """
     rem = Reminders()
     msg = rem.createReminder()
-    print(msg)
     msg_block = rem.reminder_msg_block(msg)
     helper.send_slack_message(msg_block)
     return jsonify({"success": True})
