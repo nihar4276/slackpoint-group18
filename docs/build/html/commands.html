@@ -69,6 +69,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#commands.summary.Summary"><code class="docutils literal notranslate"><span class="pre">Summary</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#module-commands.edittask">commands.edittask module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#commands.edittask.EditTask"><code class="docutils literal notranslate"><span class="pre">EditTask</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-commands">Module contents</a></li>
 </ul>
 </li>
@@ -360,6 +364,80 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="commands.summary.Summary.get_summary">
 <span class="sig-name descname"><span class="pre">get_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commands/summary.html#Summary.get_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.summary.Summary.get_summary" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-commands.edittask">
+<span id="commands-edittask-module"></span><h2>commands.edittask module<a class="headerlink" href="#module-commands.edittask" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="commands.edittask.EditTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">commands.edittask.</span></span><span class="sig-name descname"><span class="pre">EditTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commands/edittask.html#EditTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.edittask.EditTask" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class handles the Edit Task functionality.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="commands.edittask.EditTask.base_edit_task_block_format">
+<span class="sig-name descname"><span class="pre">base_edit_task_block_format</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'text':</span> <span class="pre">{'text':</span> <span class="pre">'&gt;{greeting}!</span> <span class="pre">Your</span> <span class="pre">task</span> <span class="pre">SP-{id}</span> <span class="pre">was</span> <span class="pre">edited</span> <span class="pre">successfully.',</span> <span class="pre">'type':</span> <span class="pre">'mrkdwn'},</span> <span class="pre">'type':</span> <span class="pre">'section'}</span></em><a class="headerlink" href="#commands.edittask.EditTask.base_edit_task_block_format" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="commands.edittask.EditTask.edit_task">
+<span class="sig-name descname"><span class="pre">edit_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deadline</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commands/edittask.html#EditTask.edit_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.edittask.EditTask.edit_task" title="Permalink to this definition"></a></dt>
+<dd><p>Edits a task in database and returns payload with success message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>desc</strong> (<em>str</em>) – Description of task</p></li>
+<li><p><strong>points</strong> (<em>int</em>) – Points of task</p></li>
+<li><p><strong>deadline</strong> (<em>int</em>) – Deadline of task</p></li>
+<li><p><strong>deadline</strong> – ID of task</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raise</dt>
+<dd class="field-even"><p></p></dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Blocks list of response payload</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="commands.edittask.EditTask.edit_task_input_blocks">
+<span class="sig-name descname"><span class="pre">edit_task_input_blocks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commands/edittask.html#EditTask.edit_task_input_blocks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.edittask.EditTask.edit_task_input_blocks" title="Permalink to this definition"></a></dt>
+<dd><p>Edit blocks list containing input fields for description, deadline, points of a task, along with a button to edit the task</p>
+<dl class="field-list simple">
+<dt class="field-odd">Param</dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p></p></dd>
+<dt class="field-odd">Raise</dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Blocks list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="commands.edittask.EditTask.get_task">
+<span class="sig-name descname"><span class="pre">get_task</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commands/edittask.html#EditTask.get_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.edittask.EditTask.get_task" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="commands.edittask.EditTask.greetings">
+<span class="sig-name descname"><span class="pre">greetings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Awesome',</span> <span class="pre">'Great',</span> <span class="pre">'Congratulations',</span> <span class="pre">'Well</span> <span class="pre">done',</span> <span class="pre">&quot;Let's</span> <span class="pre">go&quot;]</span></em><a class="headerlink" href="#commands.edittask.EditTask.greetings" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="commands.edittask.EditTask.is_editable">
+<span class="sig-name descname"><span class="pre">is_editable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commands/edittask.html#EditTask.is_editable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.edittask.EditTask.is_editable" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

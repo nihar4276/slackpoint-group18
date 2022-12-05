@@ -52,6 +52,14 @@ commands.summary module
    :undoc-members:
    :show-inheritance:
 
+commands.edittask module
+--------------------------
+
+.. automodule:: commands.edittask
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
