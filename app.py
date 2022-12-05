@@ -9,6 +9,9 @@ from slack import WebClient
 from slackeventsapi import SlackEventAdapter
 
 from commands.viewpoints import ViewPoints
+from commands.reminders import Reminders
+
+
 from configuration.env_config import Config
 from commands.createtask import CreateTask
 from helpers.errorhelper import ErrorHelper
@@ -79,19 +82,19 @@ def interactive_endpoint():
     return make_response("", 200)
 
 
-@app.route("/")
-def basic():
-    """
-    Health check endpoint
-
-    :param:
-    :type:
-    :raise:
-    :return: 'Hello World' - the official health check response text
-    :rtype: str
-
-    """
-    return "Hello World"
+# @app.route("/")
+# def basic():
+#     """
+#     Health check endpoint
+#
+#     :param:
+#     :type:
+#     :raise:
+#     :return: 'Hello World' - the official health check response text
+#     :rtype: str
+#
+#     """
+#     return "Hello World"
 
 
 @app.route("/viewpending", methods=["POST"])
@@ -351,6 +354,31 @@ def cron_summary():
     helper.send_slack_message(summary())
     return jsonify({"success": True})
 
+@app.route("/", methods=["POST"])
+def cron_reminder():
+    ##Make an object of reminder.py
+    ## Call reminder_message() function from it
+
+    # msg= Reminder.reminder_message()
+    # print(msg)
+
+    #Just check how the message is going from send_slack_message
+    # helper.send_slack_message(msg)
+    data = request.form
+    channel_id = data.get("channel_id")
+    user_id = data.get("user_id")
+    text = data.get("text")
+    try:
+        # Call the conversations.list method using the WebClient
+        result = client.chat_postMessage(
+            channel=channel_id,
+            text="Cron Job worked"
+            # You could also use a blocks[] array to send richer content
+        )
+        # Print result, which includes information about the message (like TS)
+
+    except SlackApiError as e:
+        print(f"Error: {e}")
 
 
 if __name__ == "__main__":
