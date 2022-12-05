@@ -33,6 +33,34 @@ class Reminders:
         # print(tom_tasks)
         return tom_tasks
 
-       
+
+    def reminder_msg_block(self,msg):
+        '''
+        Method to create message block
+        Input - list of str
+        Output - Slack block
+        '''
+        parent_msg = {"blocks": []}
+        child_msg = {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*Reminder : Urgent Tasks Due Completion :*"
+                }
+            }
+
+        parent_msg['blocks'].append(child_msg)
+        for task_text in msg:
+            child_msg = {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": task_text
+                 }
+            }
+            parent_msg['blocks'].append(child_msg)
+
+        return parent_msg
+
 
 
