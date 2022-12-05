@@ -63,6 +63,10 @@ class ErrorHelper:
             command_help = "The given Task ID does not exist! Please try again..."
         elif command == "task_already_done":
             command_help = "The given Task was already completed!"
+        elif command == "cannot_edit_completed_task":
+            command_help = "The given task cannot be edited because it has already been completed!"
         elif command == "task_done":
             command_help = "Congratulations your task is completed now!"
+        elif command == "task_edited":
+            command_help = "The given Task ID has been successfully edited!"
         return command_help

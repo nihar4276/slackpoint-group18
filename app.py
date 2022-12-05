@@ -11,6 +11,7 @@ from slackeventsapi import SlackEventAdapter
 from commands.viewpoints import ViewPoints
 from configuration.env_config import Config
 from commands.createtask import CreateTask
+from commands.edittask import EditTask
 from commands.summary import Summary
 from helpers.errorhelper import ErrorHelper
 from json import dumps
@@ -74,6 +75,38 @@ def interactive_endpoint():
                     )
                 else:
                     blocks = ct.create_task(desc=desc, points=points, deadline=deadline)
+                    slack_client.chat_postEphemeral(
+                        channel=channel_id, user=user_id, blocks=blocks
+                    )
+
+            elif actions[0]["action_id"] == "edit_action_button":
+                # Edit Task - button was clicked
+                channel_id = payload["container"]["channel_id"]
+                user_id = payload["user"]["id"]
+                task_id = int(actions[0]["value"])
+                helper = ErrorHelper()
+                et = EditTask(task_id)
+                state_values = payload["state"]["values"]
+                desc = None
+                deadline = None
+                points = None
+                for _, val in state_values.items():
+                    if "edit_action_description" in val:
+                        desc = val["edit_action_description"]["value"]
+                    elif "edit_action_deadline" in val:
+                        deadline = val["edit_action_deadline"]["selected_date"]
+                    elif "edit_action_points" in val:
+                        if val["edit_action_points"]["selected_option"] is not None:
+                            points = val["edit_action_points"]["selected_option"]["value"]
+                        else:
+                            points = None
+                if desc is None or deadline is None or points is None:
+                    error_blocks = helper.get_error_payload_blocks("edittask")
+                    slack_client.chat_postEphemeral(
+                        channel=channel_id, user=user_id, blocks=error_blocks
+                    )
+                else:
+                    blocks = et.edit_task(desc=desc, points=points, deadline=deadline)
                     slack_client.chat_postEphemeral(
                         channel=channel_id, user=user_id, blocks=blocks
                     )
@@ -221,6 +254,7 @@ def leaderboard():
     # print(jsonify(payload))
     return jsonify(payload)
 
+
 @app.route("/summary", methods=["POST"])
 def summary():
     """
@@ -235,6 +269,7 @@ def summary():
     """
 
     return Summary().get_summary()
+
 
 @app.route("/summary-cron", methods=["POST"])
 def cron_summary():
@@ -251,6 +286,31 @@ def cron_summary():
     helper.send_slack_message(summary())
     return jsonify({"success": True})
 
+
+@app.route("/edit", methods=["POST"])
+def edit():
+    """
+    Endpoint to mark a task as completed
+
+    :param:
+    :type:
+    :raise:
+    :return: Response object with payload containing task completion message
+    :rtype: Response
+
+    """
+    data = request.form
+    task_id = int(data.get('text'))
+    et = EditTask(task_id)
+    allowed, error = et.is_editable()
+    if not allowed:
+        return jsonify(error)
+
+    blocks = et.edit_task_input_blocks()
+    channel_id = data.get("channel_id")
+    user_id = data.get("user_id")
+    slack_client.chat_postEphemeral(channel=channel_id, user=user_id, blocks=blocks)
+    return Response(), 200
 
 
 if __name__ == "__main__":

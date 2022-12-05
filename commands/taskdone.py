@@ -71,6 +71,7 @@ class TaskDone:
         elif exists is True and len(task_progress) == 0:
             return helper.get_command_help("task_already_done")
         # if task is not done
+
         elif exists is True and task_progress[0].progress == 0.0:
 
             my_query = self.get_or_create(current_slack_id)
