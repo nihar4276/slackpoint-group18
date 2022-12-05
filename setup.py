@@ -14,11 +14,11 @@ def read(filename):
 
 
 setup(
-    name="slackpoint",
-    version="1.0.0",
-    url="https://github.com/nehakale8/slackpoint",
-    author="Neha Kale",
-    author_email="kaleneha997@gmail.com",
+    name="slackpoint v2",
+    version="2.1.0",
+    url="https://github.com/nihar4276/slackpoint-v2",
+    author="Nihar, Saksham, Manish, Palash, Shruti",
+    author_email="nsrao@ncsu.edu",
     description="Sets up the project automatically.",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
@@ -41,7 +41,6 @@ setup(
     classifiers=[
         "Development Status :: 1 - Production",
         "Natural Language :: English",
-        # 'Programming Language :: Python :: 3',
         "Programming Language :: Python :: 3.8",
         "Operating System :: OS Independent",
     ],
