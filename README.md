@@ -113,7 +113,8 @@ Edit the task with values pre-populated as you had entered before.
 
 Command: ``/edit-task [task ID]``
 
-![Edit GIF](https://i.imgur.com/RNykp6p.gif)
+![Edit GIF](https://user-images.githubusercontent.com/21088141/205816733-2bf10e44-baae-45d1-91f3-9a92d8123041.gif)
+
 
 This particular command will edit your existing task with the description as ``Hey! This is my edited task`` having ``4`` points and a deadline of ``15th December 2022``
 
@@ -125,7 +126,8 @@ What's better? You get it delivered to your message box automatically every day!
 
 Command: ``/summary [no parameters]``
 
-![Edit GIF](https://i.imgur.com/RNykp6p.gif)
+![Summary GIF](https://user-images.githubusercontent.com/21088141/205815864-733197f6-cf83-4117-9118-bce0341c0533.gif)
+
 
 This command will display a list of pending tasks, completed tasks, and the leaderboard. 
 
@@ -135,7 +137,7 @@ This command will display a list of pending tasks, completed tasks, and the lead
 "Am I expected to remember all my tasks with their deadlines?" Well, not anymore!
 Get reminders delivered to you a day before tasks are due, so you don't have to munch on almonds all the time. 
 
-![Edit GIF](https://i.imgur.com/RNykp6p.gif)
+![Reminder GIF](https://user-images.githubusercontent.com/21088141/205815714-a42f1d3a-4bba-4407-9c2a-e8122071fb7c.gif)
 
 This command will display a list of pending tasks due the next day. 
 
@@ -145,7 +147,8 @@ Newbie at using slackpoint? You could use some help...
 
 Command: ``/help [no parameters]``
 
-![Help GIF](https://i.imgur.com/RNykp6p.gif)
+![Help GIF](https://user-images.githubusercontent.com/21088141/205815812-8144bef2-73df-438c-a84a-6e322a09625a.gif)
+
 
 This will provide you will all the available commands and how to use them. Same sh*t this section is doing.
 
