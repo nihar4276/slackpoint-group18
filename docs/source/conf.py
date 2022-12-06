@@ -17,10 +17,10 @@ sys.path.insert(0, os.path.abspath("../.."))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "slackpoint"
-copyright = "2022, Mithil Dani, Neha Kale, Vansh Mehta, Rishikesh Yelne, Ritwik Vaidya"
-author = "Mithil Dani, Neha Kale, Vansh Mehta, Rishikesh Yelne, Ritwik Vaidya"
-release = "2.0.0"
+project = "slackpoint-v2"
+copyright = "2022, Saksham Pandey, Nihar Rao, Shruti Verma, Palash Jhamb, Manish Shinde"
+author = "Saksham Pandey, Nihar Rao, Shruti Verma, Palash Jhamb, Manish Shinde"
+release = "2.2.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
