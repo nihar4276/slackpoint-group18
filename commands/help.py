@@ -48,7 +48,14 @@ class Help:
             "*Help*",
             ">Well, you are viewing it. You don't need my help in that case :D",
         ]
-
+        self.commands_dictionary["edittask"] = [
+            "*Edit Task*",
+            ">To edit a task, just try the command */edit-task* <Task ID> and you would receive a message from Slack to update the details of the task.\n>Enter the description, deadline and the points of the task.\n>For example:\n>*Description*: Hey! This is my edited task\n>*Deadline*: 12/15/2022 (just select a date from the date picker)\n>*Points*: 5 (select a point from 1 to 5)\n>And that's it! You should receive a reply from Slack with the success message.",
+        ]
+        self.commands_dictionary["summary"] = [
+            "*Summary*",
+            ">To view the summary, just try the command */summary*, and there you go! SlackPoint would show you a list of pending tasks, completed tasks and the current leaderboard.",
+        ]
         self.payload = {"response_type": "ephemeral", "blocks": []}
 
     def help_all(self):
