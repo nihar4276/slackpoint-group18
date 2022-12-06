@@ -4,6 +4,7 @@ from flask import Flask, make_response, request, jsonify, Response
 import json
 
 from commands.help import Help
+from commands.reminders import Reminders
 from models import db
 from slack import WebClient
 from slackeventsapi import SlackEventAdapter
@@ -311,6 +312,25 @@ def edit():
     user_id = data.get("user_id")
     slack_client.chat_postEphemeral(channel=channel_id, user=user_id, blocks=blocks)
     return Response(), 200
+
+
+@app.route("/reminder-cron", methods=["POST"])
+def cron_reminder():
+    """
+    Endpoint to send reminders for pending tasks with close deadline
+
+    :param:
+    :type:
+    :raise:
+    :return: Response object with payload object sent to slack channel
+    :rtype: Response
+
+    """
+    rem = Reminders()
+    msg = rem.createReminder()
+    msg_block = rem.reminder_msg_block(msg)
+    helper.send_slack_message(msg_block)
+    return jsonify({"success": True})
 
 
 if __name__ == "__main__":
