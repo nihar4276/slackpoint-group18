@@ -22,8 +22,10 @@ A lot of teams use Slack to get things done. However when you have ton of things
 Our friends had started on this journey of making tasks easy and fun!
 We're continuing their work to make sure you don't slack off :wink:
 
-Check them out ![here] (https://github.com/nehakale8/slackpoint)
-https://user-images.githubusercontent.com/68791644/194795317-2115c60b-adb9-42ba-88d3-868f57001278.mp4
+Check them out [here](https://github.com/nehakale8/slackpoint)
+
+https://drive.google.com/drive/folders/1JQZsTSv1vNGJiJ4E64Xy0iwKvI64dEz1?usp=sharing
+
 
 
 ## Built with
