@@ -60,6 +60,14 @@ commands.edittask module
    :undoc-members:
    :show-inheritance:
 
+commands.reminders module
+--------------------------
+
+.. automodule:: commands.reminders
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

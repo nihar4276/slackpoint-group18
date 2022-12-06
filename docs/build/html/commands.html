@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>commands package &mdash; slackpoint 2.0.0 documentation</title>
+  <title>commands package &mdash; slackpoint-v2 2.2.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -29,7 +29,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> slackpoint
+            <a href="index.html" class="icon icon-home"> slackpoint-v2
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -73,6 +73,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#commands.edittask.EditTask"><code class="docutils literal notranslate"><span class="pre">EditTask</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#module-commands.reminders">commands.reminders module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#commands.reminders.Reminders"><code class="docutils literal notranslate"><span class="pre">Reminders</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-commands">Module contents</a></li>
 </ul>
 </li>
@@ -91,7 +95,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">slackpoint</a>
+          <a href="index.html">slackpoint-v2</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -443,6 +447,30 @@
 </dd></dl>
 
 </section>
+<section id="module-commands.reminders">
+<span id="commands-reminders-module"></span><h2>commands.reminders module<a class="headerlink" href="#module-commands.reminders" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="commands.reminders.Reminders">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">commands.reminders.</span></span><span class="sig-name descname"><span class="pre">Reminders</span></span><a class="reference internal" href="_modules/commands/reminders.html#Reminders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.reminders.Reminders" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class handles the Create Reminder functionality.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="commands.reminders.Reminders.createReminder">
+<span class="sig-name descname"><span class="pre">createReminder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commands/reminders.html#Reminders.createReminder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.reminders.Reminders.createReminder" title="Permalink to this definition"></a></dt>
+<dd><p>Method to create reminder</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="commands.reminders.Reminders.reminder_msg_block">
+<span class="sig-name descname"><span class="pre">reminder_msg_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commands/reminders.html#Reminders.reminder_msg_block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.reminders.Reminders.reminder_msg_block" title="Permalink to this definition"></a></dt>
+<dd><p>Method to create message block
+Input - list of str
+Output - Slack block</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-commands">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-commands" title="Permalink to this heading"></a></h2>
 </section>
@@ -459,7 +487,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Mithil Dani, Neha Kale, Vansh Mehta, Rishikesh Yelne, Ritwik Vaidya.</p>
+    <p>&#169; Copyright 2022, Saksham Pandey, Nihar Rao, Shruti Verma, Palash Jhamb, Manish Shinde.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
