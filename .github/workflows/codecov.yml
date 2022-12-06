@@ -1,4 +1,4 @@
-name: Running Code Coverage
+name: Running Tests and Code Coverage
 on:
   push:
     branches:
@@ -22,6 +22,9 @@ jobs:
         pip install -r requirements.txt
         echo requirements installed
     - name: Run the tests
+      run:
+        pytest
+    - name: Calculate code coverage
       run:
           coverage run --source=. -m pytest && coverage xml
     - name: Upload coverage to Codecov
