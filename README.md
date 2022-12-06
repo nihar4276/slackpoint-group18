@@ -24,7 +24,9 @@ We're continuing their work to make sure you don't slack off :wink:
 
 Check them out [here](https://github.com/nehakale8/slackpoint)
 
-https://drive.google.com/drive/folders/1JQZsTSv1vNGJiJ4E64Xy0iwKvI64dEz1?usp=sharing
+https://user-images.githubusercontent.com/21088141/205798073-2269309d-5a60-43f9-a20a-74532c862d66.mp4
+
+
 
 
 
