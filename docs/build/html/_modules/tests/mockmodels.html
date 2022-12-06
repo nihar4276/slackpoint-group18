@@ -54,9 +54,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>tests.mockmodels</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tests.mockmodels</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -76,15 +76,16 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked object for test case</span>
 
-<span class="sd">    :param mocker: Mocker object </span>
-<span class="sd">    :type mocker: Any </span>
+<span class="sd">    :param mocker: Mocker object</span>
+<span class="sd">    :type mocker: Any</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked object</span>
 <span class="sd">    :rtype: Any</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">mock</span> <span class="o">=</span> <span class="n">mocker</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span>
-        <span class="s2">&quot;flask_sqlalchemy.model._QueryProperty.__get__&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mocker</span><span class="o">.</span><span class="n">Mock</span><span class="p">()</span>
+        <span class="s2">&quot;flask_sqlalchemy.model._QueryProperty.__get__&quot;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mocker</span><span class="o">.</span><span class="n">Mock</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">mock</span></div>
 
 
@@ -93,18 +94,15 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param: </span>
-<span class="sd">    :type: </span>
+<span class="sd">    :param:</span>
+<span class="sd">    :type:</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked Task object</span>
 <span class="sd">    :rtype: Task</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">my_model</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
-        <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 1&quot;</span><span class="p">,</span>
-        <span class="n">points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-        <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-08-24&quot;</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 1&quot;</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-08-24&quot;</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">my_model</span></div>
 
@@ -114,18 +112,15 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param: </span>
-<span class="sd">    :type: </span>
+<span class="sd">    :param:</span>
+<span class="sd">    :type:</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked Task object</span>
 <span class="sd">    :rtype: Task</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">my_model</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
-        <span class="n">task_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 1&quot;</span><span class="p">,</span>
-        <span class="n">points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-        <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-10-24&quot;</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 1&quot;</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-10-24&quot;</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">my_model</span></div>
 
@@ -135,18 +130,15 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param: </span>
-<span class="sd">    :type: </span>
+<span class="sd">    :param:</span>
+<span class="sd">    :type:</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked Task object</span>
 <span class="sd">    :rtype: Task</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">my_model</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
-        <span class="n">task_id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 2&quot;</span><span class="p">,</span>
-        <span class="n">points</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-        <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-10-26&quot;</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 2&quot;</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-10-26&quot;</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">my_model</span></div>
 
@@ -156,18 +148,15 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param: </span>
-<span class="sd">    :type: </span>
+<span class="sd">    :param:</span>
+<span class="sd">    :type:</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked Task object</span>
 <span class="sd">    :rtype: Task</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">my_model</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
-        <span class="n">task_id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 3&quot;</span><span class="p">,</span>
-        <span class="n">points</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-        <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-08-24&quot;</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 3&quot;</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-08-24&quot;</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">my_model</span></div>
 
@@ -177,29 +166,48 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param: </span>
-<span class="sd">    :type: </span>
+<span class="sd">    :param:</span>
+<span class="sd">    :type:</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked Task object</span>
 <span class="sd">    :rtype: Task</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">my_model</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
-        <span class="n">task_id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 4&quot;</span><span class="p">,</span>
-        <span class="n">points</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-        <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-08-26&quot;</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is Task 4&quot;</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">deadline</span><span class="o">=</span><span class="s2">&quot;2022-08-26&quot;</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">my_model</span></div>
 
 
+<span class="c1"># ===== Test marked for later release ======</span>
+
+<span class="c1"># @pytest.fixture</span>
+<span class="c1"># def mock_done_task_1():</span>
+<span class="c1">#     my_model = Assignment(</span>
+<span class="c1">#         user_id=1,</span>
+<span class="c1">#         assignment_id=1,</span>
+<span class="c1">#         progress=1.0,</span>
+<span class="c1">#         assignment_created_on=&quot;2022-10-05&quot;</span>
+<span class="c1">#     )</span>
+<span class="c1">#     return my_model</span>
+
+<span class="c1"># @pytest.fixture</span>
+<span class="c1"># def mock_done_task_2():</span>
+<span class="c1">#     my_model = Assignment(</span>
+<span class="c1">#         user_id=1,</span>
+<span class="c1">#         assignment_id=1,</span>
+<span class="c1">#         progress=0.0,</span>
+<span class="c1">#         assignment_created_on=&quot;2022-10-05&quot;</span>
+<span class="c1">#     )</span>
+<span class="c1">#     return my_model</span>
+<span class="c1"># =============================================</span>
 <div class="viewcode-block" id="mock_leaderboard_position_1"><a class="viewcode-back" href="../../tests.html#tests.mockmodels.mock_leaderboard_position_1">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">mock_leaderboard_position_1</span><span class="p">(</span><span class="n">mocker</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param mocker: Mocker object </span>
-<span class="sd">    :type mocker: Any </span>
+<span class="sd">    :param mocker: Mocker object</span>
+<span class="sd">    :type mocker: Any</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked object</span>
 <span class="sd">    :rtype: Any</span>
@@ -216,8 +224,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param mocker: Mocker object </span>
-<span class="sd">    :type mocker: Any </span>
+<span class="sd">    :param mocker: Mocker object</span>
+<span class="sd">    :type mocker: Any</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked object</span>
 <span class="sd">    :rtype: Any</span>
@@ -234,8 +242,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param mocker: Mocker object </span>
-<span class="sd">    :type mocker: Any </span>
+<span class="sd">    :param mocker: Mocker object</span>
+<span class="sd">    :type mocker: Any</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked object</span>
 <span class="sd">    :rtype: Any</span>
@@ -252,8 +260,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param mocker: Mocker object </span>
-<span class="sd">    :type mocker: Any </span>
+<span class="sd">    :param mocker: Mocker object</span>
+<span class="sd">    :type mocker: Any</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked object</span>
 <span class="sd">    :rtype: Any</span>
@@ -270,8 +278,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param mocker: Mocker object </span>
-<span class="sd">    :type mocker: Any </span>
+<span class="sd">    :param mocker: Mocker object</span>
+<span class="sd">    :type mocker: Any</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked object</span>
 <span class="sd">    :rtype: Any</span>
@@ -288,8 +296,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get mocked Task object</span>
 
-<span class="sd">    :param mocker: Mocker object </span>
-<span class="sd">    :type mocker: Any </span>
+<span class="sd">    :param mocker: Mocker object</span>
+<span class="sd">    :type mocker: Any</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Mocked object</span>
 <span class="sd">    :rtype: Any</span>

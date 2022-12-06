@@ -65,6 +65,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#commands.viewpoints.ViewPoints"><code class="docutils literal notranslate"><span class="pre">ViewPoints</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#module-commands.summary">commands.summary module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#commands.summary.Summary"><code class="docutils literal notranslate"><span class="pre">Summary</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-commands">Module contents</a></li>
 </ul>
 </li>
@@ -90,9 +94,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="modules.html">slackpoint</a> &raquo;</li>
-      <li>commands package</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">slackpoint</a></li>
+      <li class="breadcrumb-item active">commands package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/commands.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -321,7 +325,7 @@
 <p>This class is used to view a list of tasks on the slack bot as per their progress.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="commands.viewpoints.ViewPoints.base_point_block_format">
-<span class="sig-name descname"><span class="pre">base_point_block_format</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'text':</span> <span class="pre">{'text':</span> <span class="pre">'&gt;SP-{id}</span> <span class="pre">({points}</span> <span class="pre">SlackPoints)</span> <span class="pre">{description}</span> <span class="pre">[Deadline:</span> <span class="pre">{deadline}]',</span> <span class="pre">'type':</span> <span class="pre">'mrkdwn'},</span> <span class="pre">'type':</span> <span class="pre">'section'}</span></em><a class="headerlink" href="#commands.viewpoints.ViewPoints.base_point_block_format" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">base_point_block_format</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'text':</span> <span class="pre">{'text':</span> <span class="pre">'&gt;Task</span> <span class="pre">ID:</span> <span class="pre">{id}</span> <span class="pre">({points}</span> <span class="pre">SlackPoints)</span> <span class="pre">{description}</span> <span class="pre">[Deadline:</span> <span class="pre">{deadline}]',</span> <span class="pre">'type':</span> <span class="pre">'mrkdwn'},</span> <span class="pre">'type':</span> <span class="pre">'section'}</span></em><a class="headerlink" href="#commands.viewpoints.ViewPoints.base_point_block_format" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -343,6 +347,20 @@
 </dd>
 </dl>
 </dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-commands.summary">
+<span id="commands-summary-module"></span><h2>commands.summary module<a class="headerlink" href="#module-commands.summary" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="commands.summary.Summary">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">commands.summary.</span></span><span class="sig-name descname"><span class="pre">Summary</span></span><a class="reference internal" href="_modules/commands/summary.html#Summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.summary.Summary" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="commands.summary.Summary.get_summary">
+<span class="sig-name descname"><span class="pre">get_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commands/summary.html#Summary.get_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#commands.summary.Summary.get_summary" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

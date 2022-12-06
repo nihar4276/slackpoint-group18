@@ -54,9 +54,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>tests.test_viewpending</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tests.test_viewpending</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -67,7 +67,14 @@
              
   <h1>Source code for tests.test_viewpending</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">commands.viewpoints</span> <span class="kn">import</span> <span class="n">ViewPoints</span>
-<span class="kn">from</span> <span class="nn">tests.mockmodels</span> <span class="kn">import</span> <span class="n">mock_pending_task_1</span><span class="p">,</span> <span class="n">mock_pending_task_2</span><span class="p">,</span> <span class="n">mock_get_sqlalchemy</span>
+<span class="kn">from</span> <span class="nn">tests.mockmodels</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">mock_pending_task_1</span><span class="p">,</span>
+    <span class="n">mock_pending_task_2</span><span class="p">,</span>
+    <span class="n">mock_get_sqlalchemy</span><span class="p">,</span>
+    <span class="n">mock_leaderboard_position_1</span><span class="p">,</span>
+    <span class="n">mock_leaderboard_position_2</span><span class="p">,</span>
+    <span class="n">mock_leaderboard_position_3</span><span class="p">,</span>
+<span class="p">)</span>
 
 
 <div class="viewcode-block" id="test_view_pending_2tasks"><a class="viewcode-back" href="../../tests.html#tests.test_viewpending.test_view_pending_2tasks">[docs]</a><span class="k">def</span> <span class="nf">test_view_pending_2tasks</span><span class="p">(</span>
@@ -82,7 +89,7 @@
 <span class="sd">    :type mock_pending_task_1: Task</span>
 <span class="sd">    :param mock_pending_task_2: Mocked Task object 2</span>
 <span class="sd">    :type mock_pending_task_2: Task</span>
-<span class="sd">    :param mock_get_sqlalchemy: Mocked SQL Alchemy object  </span>
+<span class="sd">    :param mock_get_sqlalchemy: Mocked SQL Alchemy object</span>
 <span class="sd">    :type mock_get_sqlalchemy: Any</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Assert if test case executed successfully</span>
@@ -91,10 +98,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Mocking DB call</span>
-    <span class="n">mock_get_sqlalchemy</span><span class="o">.</span><span class="n">join</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span>\
-        <span class="n">add_columns</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span>\
-        <span class="nb">filter</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span>\
-        <span class="nb">all</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">[</span><span class="n">mock_pending_task_1</span><span class="p">,</span> <span class="n">mock_pending_task_2</span><span class="p">]</span>
+    <span class="n">mock_get_sqlalchemy</span><span class="o">.</span><span class="n">join</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">add_columns</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">filter</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">mock_pending_task_1</span><span class="p">,</span>
+        <span class="n">mock_pending_task_2</span><span class="p">,</span>
+    <span class="p">]</span>
 
     <span class="c1"># test function</span>
     <span class="n">vp</span> <span class="o">=</span> <span class="n">ViewPoints</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
@@ -102,23 +109,23 @@
 
     <span class="c1"># expectation</span>
     <span class="n">expected_payload</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;response_type&#39;</span><span class="p">:</span> <span class="s1">&#39;ephemeral&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;blocks&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;response_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ephemeral&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-                <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;section&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;mrkdwn&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;&gt;SP-1 (10 SlackPoints) This is Task 1 [Deadline: 2022-10-24]&#39;</span>
-                <span class="p">}</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;section&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;Task ID: 1 (10 SlackPoints) This is Task 1 [Deadline: 2022-10-24]&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
             <span class="p">},</span>
             <span class="p">{</span>
-                <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;section&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;mrkdwn&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;&gt;SP-2 (2 SlackPoints) This is Task 2 [Deadline: 2022-10-26]&#39;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;section&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;Task ID: 2 (2 SlackPoints) This is Task 2 [Deadline: 2022-10-26]&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+        <span class="p">],</span>
     <span class="p">}</span>
 
     <span class="k">assert</span> <span class="n">payload</span> <span class="o">==</span> <span class="n">expected_payload</span></div>
@@ -130,7 +137,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Test the view pending command</span>
 
-<span class="sd">    :param mock_get_sqlalchemy: Mocked SQL Alchemy object  </span>
+<span class="sd">    :param mock_get_sqlalchemy: Mocked SQL Alchemy object</span>
 <span class="sd">    :type mock_get_sqlalchemy: Any</span>
 <span class="sd">    :raise:</span>
 <span class="sd">    :return: Assert if test case executed successfully</span>
@@ -138,10 +145,9 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Mocking DB call</span>
-    <span class="n">mock_get_sqlalchemy</span><span class="o">.</span><span class="n">join</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span>\
-        <span class="n">add_columns</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span>\
-        <span class="nb">filter</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span>\
-        <span class="nb">all</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">mock_get_sqlalchemy</span><span class="o">.</span><span class="n">join</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">add_columns</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">filter</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[]</span>
+    <span class="p">)</span>
 
     <span class="c1"># test function</span>
     <span class="n">vp</span> <span class="o">=</span> <span class="n">ViewPoints</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
@@ -149,16 +155,16 @@
 
     <span class="c1"># expectation</span>
     <span class="n">expected_payload</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;response_type&#39;</span><span class="p">:</span> <span class="s1">&#39;ephemeral&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;blocks&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;response_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ephemeral&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-                <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;section&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;mrkdwn&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;&gt;Currently there are no SlackPoints available&#39;</span>
-                <span class="p">}</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;section&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;Currently there are no SlackPoints available&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
             <span class="p">}</span>
-        <span class="p">]</span>
+        <span class="p">],</span>
     <span class="p">}</span>
 
     <span class="k">assert</span> <span class="n">payload</span> <span class="o">==</span> <span class="n">expected_payload</span></div>

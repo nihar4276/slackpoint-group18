@@ -44,6 +44,14 @@ commands.viewpoints module
    :undoc-members:
    :show-inheritance:
 
+commands.summary module
+--------------------------
+
+.. automodule:: commands.summary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

@@ -54,9 +54,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>commands.createtask</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">commands.createtask</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -69,17 +69,20 @@
 <span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+
 
 <div class="viewcode-block" id="CreateTask"><a class="viewcode-back" href="../../commands.html#commands.createtask.CreateTask">[docs]</a><span class="k">class</span> <span class="nc">CreateTask</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class handles the Create Task functionality.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">base_create_task_block_format</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;section&quot;</span><span class="p">,</span>
         <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;</span><span class="si">{greeting}</span><span class="s2">! Your task SP-</span><span class="si">{id}</span><span class="s2"> was created successfully.&quot;</span>
-        <span class="p">}</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;</span><span class="si">{greeting}</span><span class="s2">! Your task SP-</span><span class="si">{id}</span><span class="s2"> was created successfully.&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
     <span class="p">}</span>
 
     <span class="n">greetings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Awesome&quot;</span><span class="p">,</span> <span class="s2">&quot;Great&quot;</span><span class="p">,</span> <span class="s2">&quot;Congratulations&quot;</span><span class="p">,</span> <span class="s2">&quot;Well done&quot;</span><span class="p">,</span> <span class="s2">&quot;Let&#39;s go&quot;</span><span class="p">]</span>
@@ -88,15 +91,15 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor to initialize payload object</span>
 
-<span class="sd">        :param: </span>
-<span class="sd">        :type: </span>
+<span class="sd">        :param:</span>
+<span class="sd">        :type:</span>
 <span class="sd">        :raise:</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        :rtype: None</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;response_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ephemeral&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;response_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ephemeral&quot;</span><span class="p">,</span> 
             <span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[]</span>
         <span class="p">}</span>
 
@@ -104,8 +107,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create blocks list containing input fields for description, deadline, points of a task, along with a button to create the task</span>
 
-<span class="sd">        :param: </span>
-<span class="sd">        :type: </span>
+<span class="sd">        :param:</span>
+<span class="sd">        :type:</span>
 <span class="sd">        :raise:</span>
 <span class="sd">        :return: Blocks list</span>
 <span class="sd">        :rtype: list</span>
@@ -115,103 +118,64 @@
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span>
             <span class="s2">&quot;element&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text_input&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_description&quot;</span>
+                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_description&quot;</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Description&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span>
-            <span class="p">}</span>
+            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Description&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="p">}</span>
         <span class="n">block_deadline</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span>
             <span class="s2">&quot;element&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;datepicker&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;initial_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-01-01&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;initial_date&quot;</span><span class="p">:</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>
                 <span class="s2">&quot;placeholder&quot;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Select a date&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span>
+                    <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="p">},</span>
-                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_deadline&quot;</span>
+                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_deadline&quot;</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Deadline&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span>
-            <span class="p">}</span>
+            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Deadline&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="p">}</span>
         <span class="n">block_points</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span>
             <span class="s2">&quot;element&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;static_select&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;placeholder&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Select&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span>
-                <span class="p">},</span>
+                <span class="s2">&quot;placeholder&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Select&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
                 <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">[</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span>
-                        <span class="p">},</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span>
-                        <span class="p">},</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span>
+                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span>
-                        <span class="p">},</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span>
+                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span>
-                        <span class="p">},</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span>
+                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
-                            <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span>
-                        <span class="p">},</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span>
-                    <span class="p">}</span>
+                        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
                 <span class="p">],</span>
-                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_points&quot;</span>
+                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_points&quot;</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Points&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span>
-            <span class="p">}</span>
+            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Points&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="p">}</span>
         <span class="n">block_actions_button</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;button&quot;</span><span class="p">,</span>
             <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> 
                 <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Create task&quot;</span>
             <span class="p">},</span>
-            <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_button&quot;</span>
+            <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_button&quot;</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="n">block_actions</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;actions&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">[]</span>
-        <span class="p">}</span>
+        <span class="n">block_actions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;actions&quot;</span><span class="p">,</span> <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">[]}</span>
         <span class="n">block_actions</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block_actions_button</span><span class="p">)</span>
 
         <span class="n">blocks</span> <span class="o">=</span> <span class="p">[]</span>
@@ -220,19 +184,19 @@
         <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block_points</span><span class="p">)</span>
         <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block_actions</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">blocks</span></div>
-        
+
 <div class="viewcode-block" id="CreateTask.create_task"><a class="viewcode-back" href="../../commands.html#commands.createtask.CreateTask.create_task">[docs]</a>    <span class="k">def</span> <span class="nf">create_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">deadline</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a task in database and returns payload with success message along with the newly created Task ID</span>
 
-<span class="sd">        :param desc: Description of task </span>
+<span class="sd">        :param desc: Description of task</span>
 <span class="sd">        :type desc: str</span>
-<span class="sd">        :param points: Points of task </span>
+<span class="sd">        :param points: Points of task</span>
 <span class="sd">        :type points: int</span>
-<span class="sd">        :param deadline: Deadline of task </span>
+<span class="sd">        :param deadline: Deadline of task</span>
 <span class="sd">        :type deadline: Date</span>
 <span class="sd">        :raise:</span>
-<span class="sd">        :return: Blocks list of response payload </span>
+<span class="sd">        :return: Blocks list of response payload</span>
 <span class="sd">        :rtype: list</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>

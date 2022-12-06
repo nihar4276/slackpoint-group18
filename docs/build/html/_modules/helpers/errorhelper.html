@@ -54,9 +54,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>helpers.errorhelper</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">helpers.errorhelper</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -69,26 +69,24 @@
 <span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">from</span> <span class="nn">commands.help</span> <span class="kn">import</span> <span class="n">Help</span>
 
+
 <div class="viewcode-block" id="ErrorHelper"><a class="viewcode-back" href="../../helpers.html#helpers.errorhelper.ErrorHelper">[docs]</a><span class="k">class</span> <span class="nc">ErrorHelper</span><span class="p">:</span>
-    <span class="n">error_payload</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;response_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ephemeral&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[]</span>
-    <span class="p">}</span>
+    <span class="n">error_payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;response_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ephemeral&quot;</span><span class="p">,</span> <span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[]}</span>
 
     <span class="n">error_block_1</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;section&quot;</span><span class="p">,</span>
         <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;Oops! Something went wrong. Please try again with the correct command rules.&quot;</span>
-        <span class="p">}</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;Oops! Something went wrong. Please try again with the correct command rules.&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor to initialize command_help object</span>
 
-<span class="sd">        :param: </span>
-<span class="sd">        :type: </span>
+<span class="sd">        :param:</span>
+<span class="sd">        :type:</span>
 <span class="sd">        :raise:</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        :rtype: None</span>
@@ -96,12 +94,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">command_help</span> <span class="o">=</span> <span class="n">Help</span><span class="p">()</span>
-        
+
 <div class="viewcode-block" id="ErrorHelper.get_error_payload_blocks"><a class="viewcode-back" href="../../helpers.html#helpers.errorhelper.ErrorHelper.get_error_payload_blocks">[docs]</a>    <span class="k">def</span> <span class="nf">get_error_payload_blocks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get compiled error blocks for a particular command</span>
 
-<span class="sd">        :param command:  Command name </span>
+<span class="sd">        :param command:  Command name</span>
 <span class="sd">        :type command: str</span>
 <span class="sd">        :raise:</span>
 <span class="sd">        :return: List of blocks</span>
@@ -120,7 +118,7 @@
 <span class="sd">        Get compiled error blocks for a particular command</span>
 
 <span class="sd">        :param command: Command name</span>
-<span class="sd">        :type command: str </span>
+<span class="sd">        :type command: str</span>
 <span class="sd">        :raise:</span>
 <span class="sd">        :return: Error message for given command name</span>
 <span class="sd">        :rtype: str</span>
@@ -133,8 +131,12 @@
             <span class="n">command_help</span> <span class="o">=</span> <span class="s2">&quot;The given Task ID does not exist! Please try again...&quot;</span>
         <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;task_already_done&quot;</span><span class="p">:</span>
             <span class="n">command_help</span> <span class="o">=</span> <span class="s2">&quot;The given Task was already completed!&quot;</span>
+        <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;cannot_edit_completed_task&quot;</span><span class="p">:</span>
+            <span class="n">command_help</span> <span class="o">=</span> <span class="s2">&quot;The given task cannot be edited because it has already been completed!&quot;</span>
         <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;task_done&quot;</span><span class="p">:</span>
             <span class="n">command_help</span> <span class="o">=</span> <span class="s2">&quot;Congratulations your task is completed now!&quot;</span>
+        <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;task_edited&quot;</span><span class="p">:</span>
+            <span class="n">command_help</span> <span class="o">=</span> <span class="s2">&quot;The given Task ID has been successfully edited!&quot;</span>
         <span class="k">return</span> <span class="n">command_help</span></div></div>
 </pre></div>
 
