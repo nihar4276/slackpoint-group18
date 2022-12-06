@@ -44,6 +44,30 @@ commands.viewpoints module
    :undoc-members:
    :show-inheritance:
 
+commands.summary module
+--------------------------
+
+.. automodule:: commands.summary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+commands.edittask module
+--------------------------
+
+.. automodule:: commands.edittask
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+commands.reminders module
+--------------------------
+
+.. automodule:: commands.reminders
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

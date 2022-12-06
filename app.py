@@ -149,7 +149,6 @@ def vpending():
     vp = ViewPoints(progress=0.0)
     payload = vp.get_list()
 
-    print(jsonify(payload))
     return jsonify(payload)
 
 
@@ -174,7 +173,6 @@ def vcompleted():
     vp = ViewPoints(progress=1.0)
     payload = vp.get_list()
 
-    print(payload)
 
     return jsonify(payload)
 
@@ -252,7 +250,6 @@ def leaderboard():
 
     """
     payload = Leaderboard().view_leaderboard()
-    # print(jsonify(payload))
     return jsonify(payload)
 
 

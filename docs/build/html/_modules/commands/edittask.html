@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>commands.createtask &mdash; slackpoint 2.0.0 documentation</title>
+  <title>commands.edittask &mdash; slackpoint 2.0.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -56,7 +56,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">commands.createtask</li>
+      <li class="breadcrumb-item active">commands.edittask</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -65,29 +65,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for commands.createtask</h1><div class="highlight"><pre>
+  <h1>Source code for commands.edittask</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="kn">from</span> <span class="nn">helpers.errorhelper</span> <span class="kn">import</span> <span class="n">ErrorHelper</span>
 
 
-<div class="viewcode-block" id="CreateTask"><a class="viewcode-back" href="../../commands.html#commands.createtask.CreateTask">[docs]</a><span class="k">class</span> <span class="nc">CreateTask</span><span class="p">:</span>
+<div class="viewcode-block" id="EditTask"><a class="viewcode-back" href="../../commands.html#commands.edittask.EditTask">[docs]</a><span class="k">class</span> <span class="nc">EditTask</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class handles the Create Task functionality.</span>
+<span class="sd">    This class handles the Edit Task functionality.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">base_create_task_block_format</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">base_edit_task_block_format</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;section&quot;</span><span class="p">,</span>
         <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;</span><span class="si">{greeting}</span><span class="s2">! Your task SP-</span><span class="si">{id}</span><span class="s2"> was created successfully.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;&gt;</span><span class="si">{greeting}</span><span class="s2">! Your task SP-</span><span class="si">{id}</span><span class="s2"> was edited successfully.&quot;</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">}</span>
 
     <span class="n">greetings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Awesome&quot;</span><span class="p">,</span> <span class="s2">&quot;Great&quot;</span><span class="p">,</span> <span class="s2">&quot;Congratulations&quot;</span><span class="p">,</span> <span class="s2">&quot;Well done&quot;</span><span class="p">,</span> <span class="s2">&quot;Let&#39;s go&quot;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor to initialize payload object</span>
 
@@ -98,14 +99,15 @@
 <span class="sd">        :rtype: None</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;response_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ephemeral&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;response_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ephemeral&quot;</span><span class="p">,</span>
             <span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[]</span>
         <span class="p">}</span>
 
-<div class="viewcode-block" id="CreateTask.create_task_input_blocks"><a class="viewcode-back" href="../../commands.html#commands.createtask.CreateTask.create_task_input_blocks">[docs]</a>    <span class="k">def</span> <span class="nf">create_task_input_blocks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="EditTask.edit_task_input_blocks"><a class="viewcode-back" href="../../commands.html#commands.edittask.EditTask.edit_task_input_blocks">[docs]</a>    <span class="k">def</span> <span class="nf">edit_task_input_blocks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Create blocks list containing input fields for description, deadline, points of a task, along with a button to create the task</span>
+<span class="sd">        Edit blocks list containing input fields for description, deadline, points of a task, along with a button to edit the task</span>
 
 <span class="sd">        :param:</span>
 <span class="sd">        :type:</span>
@@ -114,11 +116,13 @@
 <span class="sd">        :rtype: list</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_task</span><span class="p">()</span>
         <span class="n">block_description</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span>
             <span class="s2">&quot;element&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text_input&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_description&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;edit_action_description&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;initial_value&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">description</span>
             <span class="p">},</span>
             <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Description&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="p">}</span>
@@ -126,13 +130,13 @@
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span>
             <span class="s2">&quot;element&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;datepicker&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;initial_date&quot;</span><span class="p">:</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;initial_date&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">deadline</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>
                 <span class="s2">&quot;placeholder&quot;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Select a date&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="p">},</span>
-                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_deadline&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;edit_action_deadline&quot;</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Deadline&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="p">}</span>
@@ -163,17 +167,22 @@
                         <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
                     <span class="p">},</span>
                 <span class="p">],</span>
-                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_points&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;edit_action_points&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;initial_option&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">points</span><span class="p">),</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">points</span><span class="p">),</span>
+                <span class="p">}</span>
             <span class="p">},</span>
             <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Points&quot;</span><span class="p">,</span> <span class="s2">&quot;emoji&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
         <span class="p">}</span>
         <span class="n">block_actions_button</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;button&quot;</span><span class="p">,</span>
             <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span> 
-                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Create task&quot;</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plain_text&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Edit task&quot;</span>
             <span class="p">},</span>
-            <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;create_action_button&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;edit_action_button&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="p">)</span>
         <span class="p">}</span>
         <span class="n">block_actions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;actions&quot;</span><span class="p">,</span> <span class="s2">&quot;elements&quot;</span><span class="p">:</span> <span class="p">[]}</span>
         <span class="n">block_actions</span><span class="p">[</span><span class="s2">&quot;elements&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block_actions_button</span><span class="p">)</span>
@@ -185,9 +194,29 @@
         <span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">block_actions</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">blocks</span></div>
 
-<div class="viewcode-block" id="CreateTask.create_task"><a class="viewcode-back" href="../../commands.html#commands.createtask.CreateTask.create_task">[docs]</a>    <span class="k">def</span> <span class="nf">create_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">deadline</span><span class="p">):</span>
+<div class="viewcode-block" id="EditTask.is_editable"><a class="viewcode-back" href="../../commands.html#commands.edittask.EditTask.is_editable">[docs]</a>    <span class="k">def</span> <span class="nf">is_editable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">current_task_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span>
+        <span class="n">helper</span> <span class="o">=</span> <span class="n">ErrorHelper</span><span class="p">()</span>
+
+        <span class="c1"># check if task id exists</span>
+        <span class="n">exists</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">task_id</span> <span class="o">==</span> <span class="n">current_task_id</span><span class="p">))</span><span class="o">.</span><span class="n">scalar</span><span class="p">()</span>
+
+        <span class="n">task_progress</span> <span class="o">=</span> <span class="n">Assignment</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">assignment_id</span><span class="o">=</span><span class="n">current_task_id</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">exists</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">helper</span><span class="o">.</span><span class="n">get_command_help</span><span class="p">(</span><span class="s2">&quot;no_task_id&quot;</span><span class="p">)</span>
+
+            <span class="c1"># check if task is done</span>
+        <span class="k">elif</span> <span class="n">exists</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">task_progress</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">helper</span><span class="o">.</span><span class="n">get_command_help</span><span class="p">(</span><span class="s2">&quot;cannot_edit_completed_task&quot;</span><span class="p">)</span>
+
+        <span class="c1"># if task is not done</span>
+        <span class="k">elif</span> <span class="n">exists</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">task_progress</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">progress</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="EditTask.edit_task"><a class="viewcode-back" href="../../commands.html#commands.edittask.EditTask.edit_task">[docs]</a>    <span class="k">def</span> <span class="nf">edit_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">deadline</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Creates a task in database and returns payload with success message along with the newly created Task ID</span>
+<span class="sd">        Edits a task in database and returns payload with success message</span>
 
 <span class="sd">        :param desc: Description of task</span>
 <span class="sd">        :type desc: str</span>
@@ -195,34 +224,26 @@
 <span class="sd">        :type points: int</span>
 <span class="sd">        :param deadline: Deadline of task</span>
 <span class="sd">        :type deadline: Date</span>
+<span class="sd">        :param deadline: ID of task</span>
+<span class="sd">        :type deadline: int</span>
 <span class="sd">        :raise:</span>
 <span class="sd">        :return: Blocks list of response payload</span>
 <span class="sd">        :rtype: list</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># DB call to add task, returns id</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">()</span>
-        <span class="n">task</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">desc</span>
-        <span class="n">task</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points</span>
-        <span class="n">task</span><span class="o">.</span><span class="n">deadline</span> <span class="o">=</span> <span class="n">deadline</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="nb">dict</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">desc</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="n">points</span><span class="p">,</span> <span class="n">deadline</span><span class="o">=</span><span class="n">deadline</span><span class="p">)</span>
+        <span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
-
-        <span class="c1"># task id</span>
-        <span class="nb">id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">task_id</span>
-
-        <span class="c1"># add the task in assignment, without user assignment</span>
-        <span class="n">assignment</span> <span class="o">=</span> <span class="n">Assignment</span><span class="p">()</span>
-        <span class="n">assignment</span><span class="o">.</span><span class="n">assignment_id</span> <span class="o">=</span> <span class="nb">id</span>
-        <span class="n">assignment</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">assignment</span><span class="p">)</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-
-        <span class="n">response</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_create_task_block_format</span><span class="p">)</span>
-        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">greeting</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">greetings</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_edit_task_block_format</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">greeting</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">greetings</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">task_id</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">]</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">payload</span><span class="p">[</span><span class="s2">&quot;blocks&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="EditTask.get_task"><a class="viewcode-back" href="../../commands.html#commands.edittask.EditTask.get_task">[docs]</a>    <span class="k">def</span> <span class="nf">get_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">task_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">task</span></div></div>
 </pre></div>
 
            </div>

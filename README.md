@@ -1,14 +1,16 @@
 <img src = "https://user-images.githubusercontent.com/48649849/194794889-3d3dc808-25f7-4c91-bfd5-10f9294e2d41.png" width="1080" height="200"/> 
   
 ![This is an image](https://img.shields.io/badge/purpose-Software_Engineering-blue)
-[![DOI](https://zenodo.org/badge/564125838.svg)](https://zenodo.org/badge/latestdoi/564125838)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7402718.svg)](https://doi.org/10.5281/zenodo.7402718)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Github](https://img.shields.io/badge/language-python-red.svg)](https://docs.python.org/3/)
-[![build](https://github.com/mithildani/se22-hw1-grp14/actions/workflows/test.yml/badge.svg)](https://github.com/nehakale8/slackpoint/actions)
-[![GitHub top language](https://img.shields.io/github/languages/top/nehakale8/slackpoint)](https://docs.python.org/3/)
-[![GitHub last commit](https://img.shields.io/github/last-commit/nehakale8/slackpoint)](https://github.com/nehakale8/slackpoint/commits/main)
-[![codecov](https://codecov.io/gh/nehakale8/slackpoint/branch/main/graph/badge.svg?token=1H92SAVB5S)](https://codecov.io/gh/nehakale8/slackpoint)
+[![GitHub contributors](https://img.shields.io/github/contributors/nihar4276/slackpoint-v2)](https://github.com/nihar4276/slackpoint-v2/graphs/contributors/)
+
+[![build](https://github.com/smanishs175/WalletBuddy/actions/workflows/build.yml/badge.svg)](https://github.com/nihar4276/slackpoint-v2/actions)
+[![GitHub top language](https://img.shields.io/github/languages/top/nihar4276/slackpoint-v2)](https://docs.python.org/3/)
+[![GitHub last commit](https://img.shields.io/github/last-commit/nihar4276/slackpoint-v2)](https://github.com/nihar4276/slackpoint-v2/commits/main)
+[![codecov](https://codecov.io/gh/nihar4276/slackpoint-v2/branch/main/graph/badge.svg?token=1H92SAVB5S)](https://codecov.io/gh/nihar4276/slackpoint-v2)
 
 
 Gamify your slack tasks! 💻
@@ -16,8 +18,16 @@ Gamify your slack tasks! 💻
 
 A lot of teams use Slack to get things done. However when you have ton of things to do with no short term rewards in sight, it gets difficult to check off those tasks. That's where SlackPoint comes to the rescue! SlackPoint aims to make work more fun and get people motivated to finish their tasks by gamifying Slack!
 
+## Check out Slackpoint v1
+Our friends had started on this journey of making tasks easy and fun!
+We're continuing their work to make sure you don't slack off :wink:
 
-https://user-images.githubusercontent.com/68791644/194795317-2115c60b-adb9-42ba-88d3-868f57001278.mp4
+Check them out [here](https://github.com/nehakale8/slackpoint)
+
+https://user-images.githubusercontent.com/21088141/205798073-2269309d-5a60-43f9-a20a-74532c862d66.mp4
+
+
+
 
 
 ## Built with
@@ -35,6 +45,10 @@ List of miracles that slackpoint can perform✨:
 * Mark task as done
 * View pending tasks
 * View completed tasks
+* Check the leaderboard to see who's winning!
+* Edit an existing task
+* Get a daily summary delivered to you. Or view it when you want!
+* Get reminders for tasks nearing their deadline
 * Ask for help
 
 lets go over these one by one...
@@ -92,7 +106,40 @@ Command: ``/leaderboard [no parameters]``
 
 It displays the list of the top performers on the channel along with their points.
 
-#### **6. Help:**
+#### **6. Edit a task:**
+
+Made a mistake while adding a task? No problem! 
+Edit the task with values pre-populated as you had entered before. 
+
+Command: ``/edit-task [task ID]``
+
+![Edit GIF](https://i.imgur.com/RNykp6p.gif)
+
+This particular command will edit your existing task with the description as ``Hey! This is my edited task`` having ``4`` points and a deadline of ``15th December 2022``
+
+#### **7. Summary:**
+
+Got too many tasks? Can't keep track of everything?
+Now use the summary command to get a summarized version of all tasks and the leaderboard!
+What's better? You get it delivered to your message box automatically every day!
+
+Command: ``/summary [no parameters]``
+
+![Edit GIF](https://i.imgur.com/RNykp6p.gif)
+
+This command will display a list of pending tasks, completed tasks, and the leaderboard. 
+
+
+#### **8. Reminder:**
+
+"Am I expected to remember all my tasks with their deadlines?" Well, not anymore!
+Get reminders delivered to you a day before tasks are due, so you don't have to munch on almonds all the time. 
+
+![Edit GIF](https://i.imgur.com/RNykp6p.gif)
+
+This command will display a list of pending tasks due the next day. 
+
+#### **9. Help:**
 
 Newbie at using slackpoint? You could use some help...
 
@@ -139,7 +186,7 @@ Windows:
 Clone the project
 
 ```bash
-  git clone https://github.com/nehakale8/slackpoint.git
+  git clone https://github.com/nihar4276/slackpoint-v2.git
 ```
 
 Go to the project directory
@@ -203,24 +250,16 @@ Next command to create the database - 'db.create_all()'
 
 * Assign users to tasks while creating each task
 * Add a command to reassign users
-* Add a command to edit an existing task
 * Progress of a task is currently binary. It can be improved to allow a percentage progress improvement
-* Deploy the service on the cloud
 * Improve code coverage
 * UI/UX: Improve leaderboard command response to show gifs/graphs to further make the leaderboard more attractive and gamify it
 
 
-## Developed by RoachPack
+## Developed by NC State students
 
-Heyy! We are a group of Graduate students at NC State University, or to be more specific, we are dreamers who want to be pioneers of the Computer Science world.
+Hey! We are a group of Graduate students at NC State University, or to be more specific, we are dreamers who want to be pioneers of the Computer Science world.
 Consider this homework to be one of our many steps at achieving our dreams! :wink:
 
-### Why RoachPack?
-Good question!
-We are international students, visiting the United States for the first time. We all live near the Centinnial campus of NC State University.
-Our eyes ready to take in the grandeur and technological advancements of the United States, we were rather welcomed by a group of Anthropods which we all are afraid of.
-Yup, you guessed it right. Cockroaches!
-To overcome this fear and to take on challenges, we have named our group **RoachPack**! :muscle:
 
 ### Chat Channel
 
